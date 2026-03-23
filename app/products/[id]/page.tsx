@@ -1,0 +1,78 @@
+// app/products/[id]/page.tsx
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import Image from "next/image";
+import Link from "next/link";
+import { getProductById } from "@/lib/apiService";
+import AddToCartButton from "@/components/products/AddCartButon";
+
+interface ProductPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params; // 👈 await it
+
+  let product = null;
+  let error = "";
+
+  try {
+    product = await getProductById(Number(id));
+  } catch (err) {
+    error = err instanceof Error ? err.message : "Failed to fetch product";
+  }
+
+  if (error) return <ErrorMessage message={error} />;
+  if (!product) return <ErrorMessage message="Product not found" />;
+
+  return (
+    <main className="max-w-4xl mx-auto px-4 py-10">
+      {/* Back link */}
+      <Link
+        href="/products"
+        className="text-sm text-blue-500 hover:underline mb-6 inline-block"
+      >
+        ← Back to Products
+      </Link>
+
+      <div className="flex flex-col md:flex-row gap-10 mt-4">
+        {/* Image */}
+        <div className="relative w-full md:w-72 h-72 flex-shrink-0 border rounded-lg p-4 bg-white">
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            className="object-contain p-4"
+          />
+        </div>
+
+        {/* Details */}
+        <div className="flex flex-col gap-3">
+          <span className="text-xs text-blue-500 uppercase font-semibold">
+            {product.category}
+          </span>
+
+          <h1 className="text-xl font-bold text-gray-900">{product.title}</h1>
+
+          <p className="text-gray-500 text-sm leading-relaxed">
+            {product.description}
+          </p>
+
+          <div className="flex items-center gap-2 text-sm text-gray-600">
+            <span className="text-yellow-400">★</span>
+            <span>{product.rating.rate}</span>
+            <span className="text-gray-400">
+              ({product.rating.count} reviews)
+            </span>
+          </div>
+
+          <p className="text-2xl font-bold text-gray-900">
+            ${product.price.toFixed(2)}
+          </p>
+
+          {/* Add to cart — client component */}
+          <AddToCartButton product={product} />
+        </div>
+      </div>
+    </main>
+  );
+}

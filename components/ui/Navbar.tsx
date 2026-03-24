@@ -3,17 +3,24 @@
 
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
   const { itemCount } = useCart();
+  const { isLoggedIn, logout } = useAuth();
+
+  console.log(isLoggedIn);
 
   return (
     <nav className="border-b border-gray-200 bg-white px-4 py-3">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="text-lg font-bold text-gray-900">
-          FakeStore
+        {/* Logo */}
+        <Link href="/" className="text-lg font-bold">
+          <span className="text-black">Vrit</span>
+          <span className="text-blue-500">Store</span>
         </Link>
 
+        {/* Links */}
         <div className="flex items-center gap-6">
           <Link
             href="/products"
@@ -21,6 +28,8 @@ export default function Navbar() {
           >
             Products
           </Link>
+
+          {/* Cart — always visible */}
           <Link
             href="/cart"
             className="relative text-sm text-gray-600 hover:text-gray-900"
@@ -32,6 +41,23 @@ export default function Navbar() {
               </span>
             )}
           </Link>
+
+          {/* Auth */}
+          {isLoggedIn ? (
+            <button
+              onClick={logout}
+              className="text-sm text-red-500 hover:underline"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="text-sm text-blue-500 hover:underline"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>

@@ -3,6 +3,7 @@ import ErrorMessage from "@/components/ui/ErrorMessage";
 import ProductFilters from "@/components/products/ProductFilters";
 import { Product } from "@/types";
 import { getCategories, getProducts } from "@/lib/apiService";
+import { Metadata } from "next";
 
 interface ProductsPageProps {
   searchParams: {
@@ -12,6 +13,11 @@ interface ProductsPageProps {
     page?: string;
   };
 }
+
+export const metadata: Metadata = {
+  title: "Products",
+  description: "Browse all products on VritStore.",
+};
 
 export default async function ProductsPage({
   searchParams,

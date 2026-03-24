@@ -4,9 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProductById } from "@/lib/apiService";
 import AddToCartButton from "@/components/products/AddCartButon";
+import { Metadata } from "next";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const product = await getProductById(Number(id));
+  return {
+    title: product.title,
+    description: product.description,
+    openGraph: {
+      title: product.title,
+      description: product.description,
+      images: [{ url: product.image }],
+    },
+  };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {

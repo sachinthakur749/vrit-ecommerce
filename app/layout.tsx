@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/ui/Navbar";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +16,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vrit E-commerce",
-  description:
-    "This is a sample e-commerce application built with Next.js 13 and TypeScript.",
+  title: {
+    default: "VritStore",
+    template: "%s | VritStore",
+  },
+  description: "Browse our collection of products at the best prices.",
+  keywords: ["ecommerce", "shopping", "products", "vritstore"],
+  openGraph: {
+    title: "VritStore",
+    description: "Browse our collection of products at the best prices.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -32,11 +41,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {" "}
-        <CartProvider>
-          {" "}
-          <Navbar />
-          {children}
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <Navbar />
+            {children}
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

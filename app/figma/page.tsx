@@ -103,74 +103,70 @@ export default function TaskBPage() {
 
       <section className="max-w-6xl mx-auto px-8 py-12">
         <p
-          className="text-[#6B7280] mb-2"
-          style={{ fontSize: "14px", fontWeight: 400 }}
+          className="text-[#171717] mb-2"
+          style={{ fontSize: "16px", fontWeight: 500 }}
         >
           Explore our classes and master trending skills!
         </p>
         <h2
-          className="text-[#0A0A0A] mb-8"
-          style={{ fontSize: "26px", fontWeight: 700 }}
+          className="text-[#0A0A0A] mb-12"
+          style={{ fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 900, letterSpacing: "-0.02em" }}
         >
-          Dive Into{" "}
-          <span style={{ color: "#16A34A" }}>What's Hot Right Now!</span> 🔥
+          Dive Into <span style={{ color: "#16A34A" }}>What's Hot Right Now!</span> 🔥
         </h2>
 
-        <div className="flex flex-col md:flex-row gap-4 items-stretch">
+        <div className="flex flex-col lg:flex-row gap-5 items-stretch">
+          {/* ── Main card — All Courses ── */}
           <div
-            className="rounded-2xl p-7 flex-[2] flex flex-col justify-between"
-            style={{ backgroundColor: "#C0282D", minHeight: "300px" }}
+            className="rounded-[32px] p-8 lg:p-10 flex-[2.2] flex flex-col justify-between"
+            style={{ backgroundColor: "#C0282D", minHeight: "420px" }}
           >
+            {/* View all */}
             <div className="flex justify-end">
               <span
                 className="text-white cursor-pointer hover:opacity-80 flex items-center gap-1"
-                style={{ fontSize: "13px", fontWeight: 500 }}
+                style={{ fontSize: "14px", fontWeight: 600 }}
               >
-                View all Courses <span className="ml-1">→</span>
+                View all Courses <span className="ml-1 text-lg">→</span>
               </span>
             </div>
 
-            <div className="flex gap-4 mt-6">
-              {["/react.svg", "/likes.svg", "/vuejs.svg", "/paints.svg"].map(
-                (src, i) => (
-                  <img
-                    key={i}
-                    src={src}
-                    alt={`tech-${i}`}
-                    className="w-12 h-12 object-contain"
-                  />
-                ),
-              )}
+            {/* Icons row */}
+            <div className="flex gap-4 items-center">
+              <img src="/react.svg" alt="React" className="w-16 h-16 object-contain" />
+              <img src="/bubble.svg" alt="Social" className="w-16 h-16 object-contain" />
+              <img src="/vuejs.svg" alt="Vue" className="w-16 h-16 object-contain" />
+              <img src="/palette.svg" alt="Design" className="w-16 h-16 object-contain" />
             </div>
 
-            {/* Stat */}
-            <div className="flex items-end gap-3 mt-8">
-              <div className="relative">
+            {/* Stat: 23+ All Courses */}
+            <div className="flex items-center gap-6 mt-4">
+              <div className="flex items-start">
                 <span
                   className="text-white font-black leading-none"
-                  style={{ fontSize: "96px", lineHeight: 1 }}
+                  style={{ fontSize: "110px" }}
                 >
                   23
                 </span>
                 <span
-                  className="text-white font-black absolute -top-1 -right-6"
-                  style={{ fontSize: "36px" }}
+                  className="text-white font-black relative top-2 ml-1"
+                  style={{ fontSize: "42px" }}
                 >
                   +
                 </span>
               </div>
-              <div className="mb-3 ml-6">
+              <div className="flex flex-col">
                 <p
-                  className="text-white font-bold"
-                  style={{ fontSize: "18px" }}
+                  className="text-white font-extrabold"
+                  style={{ fontSize: "28px", lineHeight: 1.1 }}
                 >
                   All Courses
                 </p>
                 <p
-                  className="text-red-200"
-                  style={{ fontSize: "12px", maxWidth: "120px" }}
+                  className="text-[#FCA5A5] mt-1"
+                  style={{ fontSize: "14px", maxWidth: "160px", fontWeight: 500 }}
                 >
-                  courses you're powering through right now.
+                  courses you&apos;re powering through right now.
                 </p>
               </div>
             </div>
@@ -178,102 +174,99 @@ export default function TaskBPage() {
 
           {/* ── Upcoming Courses ── */}
           <div
-            className="rounded-2xl p-6 flex-1 flex flex-col justify-end gap-[20px]"
-            style={{ backgroundColor: "#FDECEA", minHeight: "300px" }}
+            className="rounded-[32px] p-8 flex-1 flex flex-col gap-[40px] justify-end"
+            style={{ backgroundColor: "#FDF2F2", minHeight: "420px" }}
           >
-            {/* Vertical text top */}
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-6">
+              {/* Vertical Title */}
               <div
+                className="text-[#C0282D] font-black leading-[1]"
                 style={{
                   writingMode: "vertical-rl",
                   transform: "rotate(180deg)",
+                  fontSize: "32px",
                 }}
               >
-                <p
-                  className="font-bold text-[#C0282D] leading-tight"
-                  style={{ fontSize: "20px" }}
-                >
-                  Upcoming
-                  <br />
-                  Courses
-                </p>
+                Upcoming
+                <br />
+                Courses
               </div>
+              {/* Vertical Subtext */}
               <div
+                className="text-[#FCA5A5] font-semibold leading-tight pt-1"
                 style={{
                   writingMode: "vertical-rl",
                   transform: "rotate(180deg)",
+                  fontSize: "13px",
                 }}
               >
-                <p className="text-[#E57373] text-[11px] font-[700] leading-tight">
-                  exciting new courses <br /> waiting to boost your skills.
-                </p>
+                exciting new courses <br /> waiting to boost your skills.
               </div>
             </div>
 
-            {/* Number bottom */}
-            <div className="flex justify-center">
-              <div className="relative">
-                <span
-                  className="font-black text-[#C0282D] leading-none"
-                  style={{ fontSize: "96px", lineHeight: 1 }}
-                >
-                  05
-                </span>
-                <span
-                  className="font-black text-[#C0282D] absolute -top-1 -right-5"
-                  style={{ fontSize: "32px" }}
-                >
-                  +
-                </span>
-              </div>
+            {/* Stat bottom */}
+            <div className="flex justify-center items-start">
+              <span
+                className="font-black text-[#C0282D] leading-[0.8]"
+                style={{ fontSize: "110px" }}
+              >
+                05
+              </span>
+              <span
+                className="font-black text-[#C0282D] relative top-2 ml-1"
+                style={{ fontSize: "40px" }}
+              >
+                +
+              </span>
             </div>
           </div>
+
+          {/* ── Ongoing Courses ── */}
           <div
-            className="rounded-2xl px-4 py-6 flex-1 flex flex-col justify-end gap-[20px]"
-            style={{ backgroundColor: "#FDECEA", minHeight: "300px" }}
+            className="rounded-[32px] p-8 flex-1 flex flex-col gap-[40px] justify-end"
+            style={{ backgroundColor: "#FDF2F2", minHeight: "420px" }}
           >
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-6">
+              {/* Vertical Title */}
               <div
+                className="text-[#C0282D] font-black leading-[1.1]"
                 style={{
                   writingMode: "vertical-rl",
                   transform: "rotate(180deg)",
+                  fontSize: "32px",
                 }}
               >
-                <p
-                  className="font-bold text-[#C0282D] leading-tight"
-                  style={{ fontSize: "20px" }}
-                >
-                  Ongoing
-                  <br />
-                  Courses
-                </p>
+                Ongoing
+                <br />
+                Courses
               </div>
+              {/* Vertical Subtext */}
               <div
+                className="text-[#FCA5A5] font-semibold leading-tight pt-1"
                 style={{
                   writingMode: "vertical-rl",
                   transform: "rotate(180deg)",
+                  fontSize: "13px",
                 }}
               >
-                <p className="text-[#E57373] text-[11px] font-[700] leading-tight">
-                  currently happening—don&apos;t <br /> miss out on the action!
-                </p>
+                currently happening—don&apos;t <br /> miss out on the action!
               </div>
             </div>
-            <div className="flex justify-center">
-              <div className="relative">
-                <span
-                  className="font-black text-[#C0282D] leading-none"
-                  style={{ fontSize: "96px", lineHeight: 1 }}
-                >
-                  10
-                </span>
-                <span
-                  className="font-black text-[#C0282D] absolute -top-1 -right-5"
-                  style={{ fontSize: "32px" }}
-                >
-                  +
-                </span>
-              </div>
+
+            {/* Stat bottom */}
+            <div className="flex justify-center items-start">
+              <span
+                className="font-black text-[#C0282D] leading-[0.8]"
+                style={{ fontSize: "110px" }}
+              >
+                10
+              </span>
+              <span
+                className="font-black text-[#C0282D] relative top-2 ml-1"
+                style={{ fontSize: "40px" }}
+              >
+                +
+              </span>
             </div>
           </div>
         </div>

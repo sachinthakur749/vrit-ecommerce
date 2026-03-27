@@ -1,4 +1,3 @@
-// components/products/ProductFilters.tsx
 "use client";
 
 import { useState, useMemo } from "react";
@@ -35,7 +34,6 @@ export default function ProductFilters({
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Update URL query params
   const updateParams = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (value) {
@@ -47,7 +45,6 @@ export default function ProductFilters({
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  // Client side filtering
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const matchesSearch = product.title
@@ -70,7 +67,6 @@ export default function ProductFilters({
     });
   }, [products, search, selectedCategory, priceRange]);
 
-  // Pagination
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
   const paginatedProducts = filteredProducts.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -79,9 +75,7 @@ export default function ProductFilters({
 
   return (
     <div>
-      {/* Controls */}
       <div className="flex flex-wrap gap-4 mb-8">
-        {/* Search */}
         <input
           type="text"
           placeholder="Search products..."
@@ -93,7 +87,6 @@ export default function ProductFilters({
           className="border border-gray-300 rounded-lg px-4 py-2 text-sm flex-1 min-w-[200px] focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
-        {/* Category */}
         <select
           value={selectedCategory}
           onChange={(e) => {
@@ -111,7 +104,6 @@ export default function ProductFilters({
           ))}
         </select>
 
-        {/* Sort */}
         <select
           value={currentSort || ""}
           onChange={(e) => updateParams("sort", e.target.value)}
@@ -122,7 +114,6 @@ export default function ProductFilters({
           <option value="desc">Price: High to Low</option>
         </select>
 
-        {/* Price Range */}
         <input
           type="number"
           placeholder="Min price"
@@ -145,7 +136,6 @@ export default function ProductFilters({
         />
       </div>
 
-      {/* Product Grid */}
       {paginatedProducts.length === 0 ? (
         <div className="text-center py-20 text-gray-400">
           No products found.
@@ -158,7 +148,6 @@ export default function ProductFilters({
         </div>
       )}
 
-      {/* Pagination */}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

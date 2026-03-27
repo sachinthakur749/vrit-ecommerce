@@ -1,4 +1,3 @@
-// components/ui/Navbar.tsx
 "use client";
 
 import Link from "next/link";
@@ -14,14 +13,18 @@ export default function Navbar() {
   return (
     <nav className="border-b border-gray-200 bg-white px-4 py-3">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="text-lg font-bold">
           <span className="text-black">Vrit</span>
           <span className="text-blue-500">Store</span>
         </Link>
 
-        {/* Links */}
         <div className="flex items-center gap-6">
+          <Link
+            href="/figma"
+            className="text-sm text-gray-600 hover:text-gray-900"
+          >
+            Figma
+          </Link>
           <Link
             href="/products"
             className="text-sm text-gray-600 hover:text-gray-900"
@@ -29,7 +32,6 @@ export default function Navbar() {
             Products
           </Link>
 
-          {/* Cart — always visible */}
           <Link
             href="/cart"
             className="relative text-sm text-gray-600 hover:text-gray-900"
@@ -42,7 +44,6 @@ export default function Navbar() {
             )}
           </Link>
 
-          {/* Auth */}
           {isLoggedIn ? (
             <button
               onClick={logout}

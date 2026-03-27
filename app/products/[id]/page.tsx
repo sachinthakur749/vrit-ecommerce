@@ -1,4 +1,3 @@
-// app/products/[id]/page.tsx
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,13 +28,14 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = await params; // 👈 await it
+  const { id } = await params;
 
   let product = null;
   let error = "";
 
   try {
     product = await getProductById(Number(id));
+    // console.log(product)
   } catch (err) {
     error = err instanceof Error ? err.message : "Failed to fetch product";
   }
@@ -45,7 +45,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-10">
-      {/* Back link */}
       <Link
         href="/products"
         className="text-sm text-blue-500 hover:underline mb-6 inline-block"
@@ -54,7 +53,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </Link>
 
       <div className="flex flex-col md:flex-row gap-10 mt-4">
-        {/* Image */}
         <div className="relative w-full md:w-72 h-72 flex-shrink-0 border rounded-lg p-4 bg-white">
           <Image
             src={product.image}
@@ -64,7 +62,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
           />
         </div>
 
-        {/* Details */}
         <div className="flex flex-col gap-3">
           <span className="text-xs text-blue-500 uppercase font-semibold">
             {product.category}
@@ -88,7 +85,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
             ${product.price.toFixed(2)}
           </p>
 
-          {/* Add to cart — client component */}
           <AddToCartButton product={product} />
         </div>
       </div>

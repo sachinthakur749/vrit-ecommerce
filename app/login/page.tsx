@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Metadata } from "next";
 import { useAuth } from "@/context/AuthContext";
 
 export default function LoginPage() {
@@ -23,6 +22,8 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
+
+      // console.log(res)
 
       if (!res.ok) throw new Error("Invalid username or password");
 
@@ -48,7 +49,6 @@ export default function LoginPage() {
         <strong>83r5^_</strong>
       </p>
 
-      {/* Error */}
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-red-500 text-sm mb-4">
           {error}

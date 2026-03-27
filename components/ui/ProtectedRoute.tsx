@@ -1,4 +1,3 @@
-// components/ui/ProtectedRoute.tsx
 "use client";
 
 import { useEffect } from "react";
@@ -13,7 +12,7 @@ export default function ProtectedRoute({
   const { isLoggedIn } = useAuth();
   const router = useRouter();
 
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
   useEffect(() => {
     if (!isLoggedIn) {

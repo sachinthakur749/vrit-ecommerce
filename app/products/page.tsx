@@ -1,4 +1,3 @@
-// app/products/page.tsx
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import ProductFilters from "@/components/products/ProductFilters";
 import { Product } from "@/types";
@@ -39,13 +38,11 @@ export default async function ProductsPage({
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Products</h1>
         <p className="text-gray-500 mt-1">{products.length} items found</p>
       </div>
 
-      {/* Filters — client component */}
       <ProductFilters
         products={products}
         categories={categories}

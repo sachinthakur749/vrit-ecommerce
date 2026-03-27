@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vritstore.com/sitemap.xml
+Sitemap: https://vrit-ecommerce-nine.vercel.app/sitemap.xml

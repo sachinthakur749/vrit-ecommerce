@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
@@ -7,8 +9,11 @@ import { useAuth } from "@/context/AuthContext";
 export default function Navbar() {
   const { itemCount } = useCart();
   const { isLoggedIn, logout } = useAuth();
+  const [mounted, setMounted] = useState(false);
 
-  console.log(isLoggedIn);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <nav className="border-b border-gray-200 bg-white px-4 py-3">
@@ -37,27 +42,31 @@ export default function Navbar() {
             className="relative text-sm text-gray-600 hover:text-gray-900"
           >
             Cart
-            {itemCount > 0 && (
+            {mounted && itemCount > 0 && (
               <span className="absolute -top-2 -right-4 bg-blue-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                 {itemCount}
               </span>
             )}
           </Link>
 
-          {isLoggedIn ? (
-            <button
-              onClick={logout}
-              className="text-sm text-red-500 hover:underline"
-            >
-              Logout
-            </button>
+          {mounted ? (
+            isLoggedIn ? (
+              <button
+                onClick={logout}
+                className="text-sm text-red-500 hover:underline"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="text-sm text-blue-500 hover:underline"
+              >
+                Login
+              </Link>
+            )
           ) : (
-            <Link
-              href="/login"
-              className="text-sm text-blue-500 hover:underline"
-            >
-              Login
-            </Link>
+            <div className="w-10" />
           )}
         </div>
       </div>

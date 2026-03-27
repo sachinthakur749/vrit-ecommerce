@@ -6,12 +6,12 @@ import { getCategories, getProducts } from "@/lib/apiService";
 import { Metadata } from "next";
 
 interface ProductsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     sort?: "asc" | "desc";
     category?: string;
     search?: string;
     page?: string;
-  };
+  }>;
 }
 
 export const metadata: Metadata = {
@@ -22,20 +22,37 @@ export const metadata: Metadata = {
 export default async function ProductsPage({
   searchParams,
 }: ProductsPageProps) {
+  const resolvedSearchParams = await searchParams;
+  const sort = resolvedSearchParams.sort;
+  const category = resolvedSearchParams.category;
+  const search = resolvedSearchParams.search;
+
   let products: Product[] = [];
   let categories: string[] = [];
   let error = "";
 
   try {
     [products, categories] = await Promise.all([
-      getProducts(searchParams.sort),
+      getProducts(sort),
       getCategories(),
     ]);
   } catch (err) {
-    error = err instanceof Error ? err.message : "Failed to fetch products";
+    error = err instanceof Error ? err.message : "An unknown error occurred while fetching products.";
+    console.error("Products Page Error:", err);
   }
 
-  if (error) return <ErrorMessage message={error} />;
+  if (error) {
+    return (
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        <ErrorMessage message={error} />
+        <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <p className="text-sm text-gray-600 font-mono">
+            Debug Info: Check your Vercel Environment Variables for NEXT_PUBLIC_API_URL.
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
@@ -48,9 +65,9 @@ export default async function ProductsPage({
         <ProductFilters
           products={products}
           categories={categories}
-          currentSort={searchParams.sort}
-          currentCategory={searchParams.category}
-          currentSearch={searchParams.search}
+          currentSort={sort}
+          currentCategory={category}
+          currentSearch={search}
         />
       </Suspense>
     </main>

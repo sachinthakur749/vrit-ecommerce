@@ -53,11 +53,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </Link>
 
       <div className="flex flex-col md:flex-row gap-10 mt-4">
-        <div className="relative w-full md:w-72 h-72 flex-shrink-0 border rounded-lg p-4 bg-white">
+        <div className="relative w-full md:w-72 h-72 shrink-0 border rounded-lg p-4 bg-white">
           <Image
             src={product.image}
             alt={product.title}
             fill
+            sizes="(max-width: 768px) 100vw, 300px"
             className="object-contain p-4"
           />
         </div>

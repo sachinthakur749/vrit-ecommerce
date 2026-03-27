@@ -2,6 +2,10 @@
 
 @theme {
   --font-manrope: var(--font-manrope);
+  --color-vrit-red: #C0282D;
+  --color-vrit-pink: #FDF2F2;
+  --color-vrit-green: #16A34A;
+  --color-vrit-primary: #2563EB;
 }
 
 :root {

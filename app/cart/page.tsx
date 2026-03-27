@@ -9,7 +9,7 @@ export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart, total, itemCount } =
     useCart();
 
-  console.log(items);
+  // console.log(items);
 
   return (
     <ProtectedRoute>

@@ -3,7 +3,6 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import { CartItem, Product } from "@/types";
 
-// 1. Types
 interface CartContextType {
   items: CartItem[];
   addItem: (product: Product, quantity: number) => void;
@@ -18,12 +17,11 @@ type CartAction =
   | { type: "ADD_ITEM"; payload: { product: Product; quantity: number } }
   | { type: "REMOVE_ITEM"; payload: number }
   | {
-      type: "UPDATE_QUANTITY";
-      payload: { productId: number; quantity: number };
-    }
+    type: "UPDATE_QUANTITY";
+    payload: { productId: number; quantity: number };
+  }
   | { type: "CLEAR_CART" };
 
-// 2. Reducer
 function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
   switch (action.type) {
     case "ADD_ITEM": {
@@ -57,10 +55,8 @@ function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
   }
 }
 
-// 3. Context
 const CartContext = createContext<CartContextType | null>(null);
 
-// 4. Provider
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useReducer(cartReducer, [], () => {
     if (typeof window === "undefined") return [];
@@ -112,7 +108,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-// 5. Custom hook
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) throw new Error("useCart must be used within CartProvider");

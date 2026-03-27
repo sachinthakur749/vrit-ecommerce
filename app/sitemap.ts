@@ -1,4 +1,3 @@
-// app/sitemap.ts
 import { getProducts } from "@/lib/apiService";
 import { Product } from "@/types";
 import { MetadataRoute } from "next";

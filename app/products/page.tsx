@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import ProductFilters from "@/components/products/ProductFilters";
 import { Product } from "@/types";
@@ -43,13 +44,15 @@ export default async function ProductsPage({
         <p className="text-gray-500 mt-1">{products.length} items found</p>
       </div>
 
-      <ProductFilters
-        products={products}
-        categories={categories}
-        currentSort={searchParams.sort}
-        currentCategory={searchParams.category}
-        currentSearch={searchParams.search}
-      />
+      <Suspense fallback={<div className="text-center py-20 text-gray-400">Loading products...</div>}>
+        <ProductFilters
+          products={products}
+          categories={categories}
+          currentSort={searchParams.sort}
+          currentCategory={searchParams.category}
+          currentSearch={searchParams.search}
+        />
+      </Suspense>
     </main>
   );
 }

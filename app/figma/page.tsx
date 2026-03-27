@@ -1,15 +1,11 @@
-// app/task-b/page.tsx
-// Font: Add Oakes Grotesk to your next/font or @font-face in globals.css
+
 
 export default function TaskBPage() {
   return (
     <main
       className="min-h-screen bg-white"
-      style={{ fontFamily: "'Oakes Grotesk', sans-serif" }}
     >
-      {/* ═══════════════════════════════════════
-          SECTION 1 — SERVICE
-      ═══════════════════════════════════════ */}
+
       <section className="max-w-6xl mx-auto px-8 pt-16 pb-0">
         {/* Top row — description left, services right */}
         <div className="flex flex-col md:flex-row gap-8 md:gap-32 items-start mb-16">
@@ -104,11 +100,8 @@ export default function TaskBPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════
-          SECTION 2 — COURSES
-      ═══════════════════════════════════════ */}
+
       <section className="max-w-6xl mx-auto px-8 py-12">
-        {/* Heading */}
         <p
           className="text-[#6B7280] mb-2"
           style={{ fontSize: "14px", fontWeight: 400 }}
@@ -123,14 +116,11 @@ export default function TaskBPage() {
           <span style={{ color: "#16A34A" }}>What's Hot Right Now!</span> 🔥
         </h2>
 
-        {/* Cards */}
         <div className="flex flex-col md:flex-row gap-4 items-stretch">
-          {/* ── Main card — All Courses ── */}
           <div
             className="rounded-2xl p-7 flex-[2] flex flex-col justify-between"
             style={{ backgroundColor: "#C0282D", minHeight: "300px" }}
           >
-            {/* View all */}
             <div className="flex justify-end">
               <span
                 className="text-white cursor-pointer hover:opacity-80 flex items-center gap-1"
@@ -140,7 +130,6 @@ export default function TaskBPage() {
               </span>
             </div>
 
-            {/* Tech icons */}
             <div className="flex gap-4 mt-6">
               {["/react.svg", "/likes.svg", "/vuejs.svg", "/paints.svg"].map(
                 (src, i) => (

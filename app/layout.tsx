@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/ui/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-manrope",
+});
 
 export const metadata: Metadata = {
   title: "Vrit Store",
@@ -21,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={` h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={`${manrope.variable} h-full antialiased`}>
+      <body className={`${manrope.className} min-h-full flex flex-col`}>
         <AuthProvider>
           <CartProvider>
             <Navbar />

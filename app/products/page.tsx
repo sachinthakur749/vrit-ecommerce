@@ -37,39 +37,49 @@ export default async function ProductsPage({
       getCategories(),
     ]);
   } catch (err) {
-    error = err instanceof Error ? err.message : "An unknown error occurred while fetching products.";
+    error =
+      err instanceof Error
+        ? err.message
+        : "An unknown error occurred while fetching products.";
     console.error("Products Page Error:", err);
   }
 
   if (error) {
     return (
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-6 py-24 pt-28">
         <ErrorMessage message={error} />
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-          <p className="text-sm text-gray-600 font-mono">
-            Debug Info: Check your Vercel Environment Variables for NEXT_PUBLIC_API_URL.
-          </p>
-        </div>
       </main>
     );
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Products</h1>
-        <p className="text-gray-500 mt-1">{products.length} items found</p>
-      </div>
+    <main className=" bg-white ">
+      {/* Section Header */}
 
-      <Suspense fallback={<div className="text-center py-20 text-gray-400">Loading products...</div>}>
-        <ProductFilters
-          products={products}
-          categories={categories}
-          currentSort={sort}
-          currentCategory={category}
-          currentSearch={search}
-        />
-      </Suspense>
+      <div className="max-w-6xl mx-auto px-6 py-12 pt-28 min-h-screen">
+        <div className="text-center mb-12">
+          <h1 className="text-[48px] font-semibold text-[#1d1d1f] tracking-tight leading-[1.1]">
+            All Products
+          </h1>
+          <p className="text-[17px] text-[#6e6e73] mt-3 max-w-md mx-auto">
+            Browse our complete collection of premium items.
+          </p>
+        </div>
+
+        <Suspense
+          fallback={
+            <div className="text-center py-20 text-[#6e6e73]">Loading...</div>
+          }
+        >
+          <ProductFilters
+            products={products}
+            categories={categories}
+            currentSort={sort}
+            currentCategory={category}
+            currentSearch={search}
+          />
+        </Suspense>
+      </div>
     </main>
   );
 }

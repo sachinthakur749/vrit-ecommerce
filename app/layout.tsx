@@ -29,7 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
-      <body className={`${manrope.className} min-h-full flex flex-col`}>
+      <body
+        className={`${manrope.className} min-h-full flex flex-col bg-[#f5f5f7]`}
+      >
         <AuthProvider>
           <CartProvider>
             <Navbar />

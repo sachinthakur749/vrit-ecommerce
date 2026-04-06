@@ -12,23 +12,26 @@ export default function Pagination({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex justify-center items-center gap-2 mt-10">
+    <div className="flex justify-center items-center gap-3 mt-16">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 rounded-lg border border-gray-300 text-sm disabled:opacity-40 hover:bg-gray-50"
+        className="w-11 h-11 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.1)]
+                   disabled:opacity-40 disabled:cursor-not-allowed
+                   hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]
+                   transition-all flex items-center justify-center text-[15px] text-[#1d1d1f]"
       >
-        Previous
+        ←
       </button>
 
       {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-4 py-2 rounded-lg text-sm border ${
+          className={`w-11 h-11 rounded-full text-[15px] font-medium transition-all ${
             page === currentPage
-              ? "bg-blue-500 text-white border-blue-500"
-              : "border-gray-300 hover:bg-gray-50"
+              ? "bg-[#0071e3] text-white shadow-[0_4px_12px_rgba(0,113,227,0.3)]"
+              : "bg-white text-[#1d1d1f] shadow-[0_1px_3px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
           }`}
         >
           {page}
@@ -38,9 +41,12 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 rounded-lg border border-gray-300 text-sm disabled:opacity-40 hover:bg-gray-50"
+        className="w-11 h-11 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.1)]
+                   disabled:opacity-40 disabled:cursor-not-allowed
+                   hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]
+                   transition-all flex items-center justify-center text-[15px] text-[#1d1d1f]"
       >
-        Next
+        →
       </button>
     </div>
   );

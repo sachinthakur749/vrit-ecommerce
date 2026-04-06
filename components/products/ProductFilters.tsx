@@ -75,73 +75,131 @@ export default function ProductFilters({
 
   return (
     <div>
-      <div className="flex flex-wrap gap-4 mb-8">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="border border-gray-300 rounded-lg px-4 py-2 text-sm flex-1 min-w-[200px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+      {/* Filter Bar */}
+      <div className="flex flex-wrap gap-3 mb-10">
+        {/* Search Input */}
+        <div className="relative flex-1 min-w-[200px]">
+          <svg
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6e6e73]"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="w-full bg-white rounded-full px-10 py-3 text-[14px]
+                       shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]
+                       focus:outline-none focus:ring-[2px] focus:ring-[#0071e3]
+                       placeholder:text-[#6e6e73] transition-all"
+          />
+        </div>
 
-        <select
-          value={selectedCategory}
-          onChange={(e) => {
-            setSelectedCategory(e.target.value);
-            setCurrentPage(1);
-            updateParams("category", e.target.value);
-          }}
-          className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">All Categories</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-
+        {/* Sort Dropdown */}
         <select
           value={currentSort || ""}
           onChange={(e) => updateParams("sort", e.target.value)}
-          className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-white rounded-full px-5 py-3 text-[14px] font-medium
+                     shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]
+                     focus:outline-none focus:ring-[2px] focus:ring-[#0071e3]
+                     cursor-pointer appearance-none pr-10
+                     bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg%20xmlns%3d%22http%3a%2f%2fwww.w3.org%2f2000%2fsvg%22%20width%3d%2216%22%20height%3d%2216%22%20viewBox%3d%220%200%2024%2024%22%20fill%3d%22none%22%20stroke%3d%22%236e6e73%22%20stroke-width%3d%222%22%20stroke-linecap%3d%22round%22%20stroke-linejoin%3d%22round%22%3e%3cpolyline%20points%3d%226%209%2012%2015%2018%209%22%3e%3c%2fpolyline%3e%3c%2fsvg%3e')]
+                     bg-[length:16px] bg-[right_12px_center] bg-no-repeat"
         >
-          <option value="">Default Sort</option>
+          <option value="">Sort by</option>
           <option value="asc">Price: Low to High</option>
           <option value="desc">Price: High to Low</option>
         </select>
+      </div>
 
+      {/* Category Pills */}
+      <div className="flex flex-wrap gap-2 mb-10">
+        <button
+          onClick={() => {
+            setSelectedCategory("");
+            setCurrentPage(1);
+            updateParams("category", "");
+          }}
+          className={`px-5 py-2.5 rounded-full text-[14px] font-medium transition-all ${
+            selectedCategory === ""
+              ? "bg-[#0071e3] text-white"
+              : "bg-white text-[#1d1d1f] hover:bg-gray-100 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]"
+          }`}
+        >
+          All
+        </button>
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => {
+              setSelectedCategory(cat);
+              setCurrentPage(1);
+              updateParams("category", cat);
+            }}
+            className={`px-5 py-2.5 rounded-full text-[14px] font-medium transition-all ${
+              selectedCategory === cat
+                ? "bg-[#0071e3] text-white"
+                : "bg-white text-[#1d1d1f] hover:bg-gray-100 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Price Range */}
+      <div className="flex flex-wrap gap-3 mb-10 items-center">
+        <span className="text-[14px] text-[#6e6e73]">Price:</span>
         <input
           type="number"
-          placeholder="Min price"
+          placeholder="Min"
           value={priceRange.min}
           onChange={(e) => {
             setPriceRange((prev) => ({ ...prev, min: e.target.value }));
             setCurrentPage(1);
           }}
-          className="border border-gray-300 rounded-lg px-4 py-2 text-sm w-28 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-white rounded-full w-28 px-4 py-2.5 text-[14px]
+                     shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]
+                     focus:outline-none focus:ring-[2px] focus:ring-[#0071e3]
+                     placeholder:text-[#6e6e73]"
         />
+        <span className="text-[14px] text-[#6e6e73]">—</span>
         <input
           type="number"
-          placeholder="Max price"
+          placeholder="Max"
           value={priceRange.max}
           onChange={(e) => {
             setPriceRange((prev) => ({ ...prev, max: e.target.value }));
             setCurrentPage(1);
           }}
-          className="border border-gray-300 rounded-lg px-4 py-2 text-sm w-28 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-white rounded-full w-28 px-4 py-2.5 text-[14px]
+                     shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]
+                     focus:outline-none focus:ring-[2px] focus:ring-[#0071e3]
+                     placeholder:text-[#6e6e73]"
         />
       </div>
 
+      {/* Product Grid */}
       {paginatedProducts.length === 0 ? (
-        <div className="text-center py-20 text-gray-400">
-          No products found.
+        <div className="text-center py-24">
+          <p className="text-[17px] text-[#6e6e73]">No products found.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {paginatedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

@@ -20,28 +20,39 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
   };
 
   return (
-    <div className="flex items-center gap-3 mt-2">
-      <div className="flex items-center border border-gray-300 rounded-lg">
+    <div className="flex items-center gap-4 mt-6">
+      {/* Quantity Selector */}
+      <div className="flex items-center bg-[#f5f5f7] rounded-full">
         <button
           onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-          className="px-3 py-2 text-gray-600 hover:bg-gray-100"
+          className="w-11 h-11 flex items-center justify-center text-[#6e6e73]
+                     hover:text-[#1d1d1f] transition-colors text-lg"
         >
-          -
+          −
         </button>
-        <span className="px-4 py-2 text-sm font-medium">{quantity}</span>
+        <span className="w-12 text-center text-[17px] font-medium">
+          {quantity}
+        </span>
         <button
           onClick={() => setQuantity((q) => q + 1)}
-          className="px-3 py-2 text-gray-600 hover:bg-gray-100"
+          className="w-11 h-11 flex items-center justify-center text-[#6e6e73]
+                     hover:text-[#1d1d1f] transition-colors text-lg"
         >
           +
         </button>
       </div>
 
+      {/* Add to Cart Button */}
       <button
         onClick={handleAdd}
-        className="bg-blue-500 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-600"
+        className={`flex-1 bg-[#0071e3] text-white px-8 py-4 rounded-[12px] text-[17px] font-medium
+                    transition-all ${
+                      added
+                        ? "bg-green-500"
+                        : "hover:bg-[#0077ed]"
+                    }`}
       >
-        {added ? "Added ✓" : "Add to Cart"}
+        {added ? "Added to Cart" : "Add to Cart"}
       </button>
     </div>
   );

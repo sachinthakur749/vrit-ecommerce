@@ -83,7 +83,9 @@ export default function HomePage() {
             >
               <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
             </svg>
-            <span className="text-[14px] text-[#6e6e73]">Quality Guarantee</span>
+            <span className="text-[14px] text-[#6e6e73]">
+              Quality Guarantee
+            </span>
           </div>
         </div>
       </div>
